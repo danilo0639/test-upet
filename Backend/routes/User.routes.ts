@@ -3,7 +3,7 @@ import User from '../models/User.models';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/users', async (req, res) => {
     try {
         const user = new User(req.body);
         await user.save();

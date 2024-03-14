@@ -16,26 +16,20 @@ const userSchema = new Schema<IUser>({
     },
     lastName: {
         type: String,
-        required: true,
+        required: true
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     phone: {
         type: String,
-        required: true,
-        unique: true,
-        validate: {
-            validator: (value: string) => /^\d{10}$/.test(value),
-            message: (props: any) => `${props.value} It is not a number phone`
-        }
+        required: true
     },
     password: {
         type: String,
-        required: true,
-        minlength: 6
+        required: true
+
     }
 }, { timestamps: true });
 
