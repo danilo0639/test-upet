@@ -11,7 +11,7 @@ const ThanksView = () => {
     
     const mobileStyles = {
       marginTop: "5rem",
-      "@media (max-width: 600px)": {
+      "@media (maxWidth: 600px)": {
         marginTop: "0",
       }
     };

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, CircularProgress, ThemeProvider, css } from "@mui/material";
+import { Button, CircularProgress, ThemeProvider } from "@mui/material";
 import MainContainer from "../molecules/MainContainer";
 import UpetIcon from "../utils/UpetIcon";
 import theme from "../../Theme/Theme";
@@ -18,10 +18,12 @@ function Form() {
   const [password, setPassword] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = () => {
-    setIsButtonDisabled(!(name && lastName && phone && email && password));
+    setIsButtonDisabled(!(name && lastName && phone && isEmailValid && isPasswordValid));
   };
 
   const handleSubmit = async () => {
@@ -39,22 +41,15 @@ function Form() {
       console.log("Data sent");
       navigate("/message", { state: { name, phone, email } });
     } catch (error) {
-      console.error("Error send the data:", error);
+      console.error("Error sending the data:", error);
       setIsLoading(false);
     }
-  };
-
-  const mobileStyles = {
-    marginTop: "5rem",
-    "@media (max-width: 600px)": {
-      marginTop: "0",
-    },
   };
 
   return (
     <ThemeProvider theme={theme}>
       <MainContainer>
-        <div style={{ ...mobileStyles }}>
+        <div style={{ marginTop: "5rem" }}>
           <UpetIcon />
         </div>
         <div style={{ display: "flex", flexDirection: "row" }}>
@@ -84,15 +79,17 @@ function Form() {
         />
         <EmailInputField
           value={email}
-          onChange={(value) => {
+          onChange={(value, isValid) => {
             setEmail(value);
+            setIsEmailValid(isValid);
             handleInputChange();
           }}
         />
         <PasswordInputField
           value={password}
-          onChange={(value) => {
+          onChange={(value, isValid) => {
             setPassword(value);
+            setIsPasswordValid(isValid);
             handleInputChange();
           }}
         />

@@ -20,7 +20,15 @@ const userSchema = new Schema<IUser>({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        validate: {
+            validator: (value: string) => {
+                const emailRegex: RegExp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+                return emailRegex.test(value);
+            },
+            message: props => `${props.value} is not a valid email address!`
+        }
     },
     phone: {
         type: String,
@@ -28,8 +36,14 @@ const userSchema = new Schema<IUser>({
     },
     password: {
         type: String,
-        required: true
-
+        required: true,
+        validate: {
+            validator: (value: string) => {
+                const passwordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+                return passwordRegex.test(value);
+            },
+            message: props => `Password must be longer than 8 characters with numbers and letters.`
+        }
     }
 }, { timestamps: true });
 

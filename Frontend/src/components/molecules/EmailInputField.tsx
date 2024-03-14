@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
 
-const EmailInputField: React.FC<{ value: string; onChange: (value: string) => void }> = ({ value, onChange }) => {
-  const [error, setError] = useState<string>("");
+const EmailInputField: React.FC<{ value: string; onChange: (value: string, isValid: boolean) => void }> = ({ value, onChange }) => {
+  const [isValid, setIsValid] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
+    let newValue = e.target.value;
 
-    if (value.length === 1) {
-      value = value.toLowerCase();
+    // Convertir la primera letra a minúscula
+    if (newValue.length === 1) {
+      newValue = newValue.toLowerCase();
     }
 
-    onChange(value);
+    const isValidEmail = validateEmail(newValue);
 
+    setIsValid(isValidEmail);
+    setErrorMessage(isValidEmail ? "" : "Invalid email address");
+
+    onChange(newValue, isValidEmail);
+  };
+
+  const validateEmail = (value: string): boolean => {
     const emailRegex: RegExp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
-
-    if (!emailRegex.test(value)) {
-      setError("Invalid email address");
-    } else {
-      setError("");
-    }
+    return emailRegex.test(value);
   };
 
   return (
@@ -31,8 +35,8 @@ const EmailInputField: React.FC<{ value: string; onChange: (value: string) => vo
         fullWidth
         value={value}
         onChange={handleChange}
-        error={!!error}
-        helperText={error}
+        error={!isValid}
+        helperText={errorMessage}
       />
     </div>
   );
