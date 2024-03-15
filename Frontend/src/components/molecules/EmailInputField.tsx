@@ -8,7 +8,6 @@ const EmailInputField: React.FC<{ value: string; onChange: (value: string, isVal
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value;
 
-    // Convertir la primera letra a minúscula
     if (newValue.length === 1) {
       newValue = newValue.toLowerCase();
     }
