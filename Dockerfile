@@ -1,20 +1,23 @@
 # Usa la imagen base de Node.js
-FROM node:latest
+FROM node:latest AS backend
 
-# Establece el directorio de trabajo en la carpeta de la aplicación
+WORKDIR /usr/src/app/Backend
+
+COPY Backend .
+
+WORKDIR /usr/src/app/Frontend
+
+COPY Frontend .
+
+
 WORKDIR /usr/src/app
 
-# Copia los archivos de la aplicación al contenedor
-COPY package*.json ./
 
-# Instala las dependencias
+COPY package*.json ./
 RUN npm install
 
-# Copia el resto de los archivos de la aplicación
-COPY . .
+RUN npm install -g nodemon
 
-# Expone el puerto en el que la aplicación se ejecutará
-EXPOSE 4000
+EXPOSE 3000
 
-# Comando para ejecutar la aplicación
-CMD ["npm", "start"]
+CMD ["npm", "run", "server"]
