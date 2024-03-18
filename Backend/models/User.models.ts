@@ -1,5 +1,5 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import bcrypt from 'bcrypt';
+const bcrypt = require("bcrypt");
 
 interface IUser extends Document {
     name: string;
@@ -42,7 +42,7 @@ const userSchema = new Schema<IUser>({
                 const passwordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
                 return passwordRegex.test(value);
             },
-            message: props => `Password must be longer than 8 characters with numbers and letters.`
+            message: () => `Password must be longer than 8 characters with numbers and letters.`
         }
     }
 }, { timestamps: true });

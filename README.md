@@ -20,3 +20,8 @@ Brief description of the project.
 ### Frontend
 1. From the `frontend` folder, run `npm run dev ` to start the frontend application.
 
+### Test
+1. From the `test` folder, run `npm test ` to start the frontend application.
+
+
+
