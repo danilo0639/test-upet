@@ -5,7 +5,7 @@ const validatePassword = (value: string): string | null => {
   if (!value) return "Password is required";
 
   const passwordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  if (!passwordRegex.test(value)) return "Password must be longer than 8 characters with numbers and letters"; // Verifica si el formato es válido
+  if (!passwordRegex.test(value)) return "Password must be longer than 8 characters with numbers and letters";
 
   return null;
 };

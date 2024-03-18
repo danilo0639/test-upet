@@ -1,22 +1,13 @@
-# Usa la imagen base de Node.js
-FROM node:latest AS backend
+FROM node:latest
 
-WORKDIR /usr/src/app/Backend
+WORKDIR /index
 
-COPY Backend .
-
-WORKDIR /usr/src/app/Frontend
-
-COPY Frontend .
-
-
-WORKDIR /usr/src/app
-
-
-COPY package*.json ./
+COPY package*.json  ../
 RUN npm install
-
 RUN npm install -g nodemon
+RUN npm install -g ts-node
+
+COPY . .
 
 EXPOSE 3000
 
