@@ -11,6 +11,7 @@ Brief description of the project.
 ### Frontend
 1. Navigate to the `frontend` folder.
 2. Run `npm install` to install the dependencies.
+3. Run npm install --save-dev vite
 
 ## Usage
 
