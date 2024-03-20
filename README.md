@@ -4,6 +4,8 @@ Brief description of the project.
 
 ## Installation
 
+Run `npm install` to install the dependencies.
+
 ### Backend
 1. Navigate to the `backend` folder.
 2. Run `npm install` to install the dependencies.
@@ -20,6 +22,7 @@ Brief description of the project.
 
 ### Frontend
 1. From the `frontend` folder, run `npm run dev ` to start the frontend application.
+2. Main page /form
 
 ### Test
 1. From the `test` folder, run `npm test ` to start the frontend application.
